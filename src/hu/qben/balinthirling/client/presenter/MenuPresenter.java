@@ -117,25 +117,65 @@ public class MenuPresenter implements Presenter {
 	 * @param arr
 	 */
 	private void listMenuItems(JsArray<JsFile> arr) {
-		int i;
-		for(i=0;i<arr.length() && arr.get(i).getType() != AppController.STATE_VIDEO;i++) {
-			addMenuItem(arr.get(i).getName(), arr.get(i).getType());
-			GWT.log(arr.get(i).getType());
-		}
-		addMenuSeparator();
-		for(;i<arr.length();i++) {
-			addMenuItem(arr.get(i).getName(), arr.get(i).getType());
-			GWT.log(arr.get(i).getType());
-		}
-		//TODO
-		//addMenuItem(SLIDESHOWS);
+		addImageMenuItems(arr);
 		
 		addMenuSeparator();
 		
-		//TODO remove commissioned work altogether
-		//addMenuItem(COMMISSIONED_WORK, AppController.STATE_COMMISSIONED);
+		addVideoMenuItems(arr);
+		
+		addMenuSeparator();
+		
 		addMenuItem(BIO, AppController.STATE_TEXT);
 		addMenuItem(CONTACT, AppController.STATE_TEXT);
+	}
+
+	/**
+	 * 
+	 */
+	private void addVideoMenuItems(JsArray<JsFile> arr) {
+		for(int i=0;i<arr.length();i++) {
+			if(isVideoItem(arr.get(i))) {
+				addMenuItem(arr.get(i));
+			}
+		}
+	}
+
+	/**
+	 * @param item
+	 * @return
+	 */
+	private boolean isVideoItem(JsFile item) {
+		if(item.getType() == AppController.STATE_VIDEO) {
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * @param arr 
+	 * 
+	 */
+	private void addImageMenuItems(JsArray<JsFile> arr) {
+		for(int i=0;i<arr.length();i++) {
+			if(isImageItem(arr.get(i))) {
+				addMenuItem(arr.get(i));
+			}
+		}
+	}
+	
+	/**
+	 * @param item
+	 * @return
+	 */
+	private boolean isImageItem(JsFile item) {
+		if(item.getType() == AppController.STATE_IMAGE) {
+			return true;
+		}
+		return false;
+	}
+
+	private void addMenuItem(JsFile item) {
+		addMenuItem(item.getName(), item.getType());
 	}
 
 	private void addMenuItem(String name, String type) {
