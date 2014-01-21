@@ -125,7 +125,8 @@ public class MenuPresenter implements Presenter {
 		
 		addMenuSeparator();
 		
-		addMenuItem(COMMISSIONED_WORK, AppController.STATE_COMMISSIONED);
+		//TODO remove commissioned work altogether
+		//addMenuItem(COMMISSIONED_WORK, AppController.STATE_COMMISSIONED);
 		addMenuItem(BIO, AppController.STATE_TEXT);
 		addMenuItem(CONTACT, AppController.STATE_TEXT);
 	}
