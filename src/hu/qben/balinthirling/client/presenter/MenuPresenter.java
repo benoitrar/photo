@@ -117,8 +117,15 @@ public class MenuPresenter implements Presenter {
 	 * @param arr
 	 */
 	private void listMenuItems(JsArray<JsFile> arr) {
-		for(int i=0;i<arr.length();i++) {
+		int i;
+		for(i=0;i<arr.length() && arr.get(i).getType() != AppController.STATE_VIDEO;i++) {
 			addMenuItem(arr.get(i).getName(), arr.get(i).getType());
+			GWT.log(arr.get(i).getType());
+		}
+		addMenuSeparator();
+		for(;i<arr.length();i++) {
+			addMenuItem(arr.get(i).getName(), arr.get(i).getType());
+			GWT.log(arr.get(i).getType());
 		}
 		//TODO
 		//addMenuItem(SLIDESHOWS);
