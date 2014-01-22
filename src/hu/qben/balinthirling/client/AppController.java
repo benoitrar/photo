@@ -131,7 +131,7 @@ public class AppController implements ValueChangeHandler<String> {
 				state = STATE_IMAGE;
 				framePresenter.setTheme(FramePresenter.PHOTOS, MenuPresenter.WELCOME);
 				framePresenter.go(frameDiv);
-			} else if(token.equals(MenuPresenter.COMMISSIONED_WORK)) {
+			/*} else if(token.equals(MenuPresenter.COMMISSIONED_WORK)) {
 				state = STATE_COMMISSIONED;
 				getCommissionedPresenter().go(frameDiv);
 			} else if(token.equals(CommissionedPresenter.WEDDING)
@@ -139,7 +139,7 @@ public class AppController implements ValueChangeHandler<String> {
 					|| token.equals(CommissionedPresenter.ARCHITECTURE)) {
 				state = STATE_COMMISSIONED;
 				framePresenter.setTheme(FramePresenter.COMMISSIONED, token);
-				framePresenter.go(frameDiv);
+				framePresenter.go(frameDiv);*/
 			} else if(token.equals(MenuPresenter.BIO) || token.equals(MenuPresenter.CONTACT)) {
 				state = STATE_TEXT;
 				getTextInfoPresenter(token).go(frameDiv);
