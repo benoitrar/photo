@@ -1,6 +1,7 @@
 package hu.qben.balinthirling.client.view;
 
 import hu.qben.balinthirling.client.presenter.VideoPresenter;
+import hu.qben.balinthirling.shared.util.Constants;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
@@ -31,7 +32,7 @@ public class VideoView extends Composite implements VideoPresenter.Display {
 		//Window.alert(url);
 		frame = new Frame(url);
 		frame.setWidth("750px");
-		frame.setHeight("500px");
+		frame.setHeight(Constants.FRAME_HEIGHT_PX);
 		content.setWidget(0, 0, frame);
 	}
 
