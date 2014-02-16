@@ -2,6 +2,7 @@ package hu.qben.balinthirling.client.view;
 
 import hu.qben.balinthirling.client.presenter.FramePresenter;
 
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
@@ -20,9 +21,11 @@ public class FrameView extends Composite implements FramePresenter.Display {
 	 * The image. Its <code>source</code> will be set by <code>FramePresenter</code>.
 	 */
 	private final FlexTable content = new FlexTable();
-	private static final HorizontalPanel textDiv = new HorizontalPanel();//"<div id='text'></div>");
+	private static final HorizontalPanel infoPanel = new HorizontalPanel();//"<div id='text'></div>");
 	private final Image image = new Image();
-	private final HTML stepperLabel = new HTML("0/0");
+	private final Button leftButton = new Button("<");
+	private final HTML imageNumberLabel = new HTML("0/0");
+	private final Button rightButton = new Button(">");
 	private static final HTML separationPanel = new HTML("&nbsp;&nbsp;");
 	private final HTML captionLabel = new HTML(" ");
 	
@@ -32,18 +35,20 @@ public class FrameView extends Composite implements FramePresenter.Display {
 	public FrameView() {
 		initWidget(content);
 		
-		textDiv.add(stepperLabel);
-		textDiv.add(separationPanel);
-		textDiv.add(captionLabel);
+		infoPanel.add(leftButton);
+		infoPanel.add(imageNumberLabel);
+		infoPanel.add(rightButton);
+		infoPanel.add(separationPanel);
+		infoPanel.add(captionLabel);
 		content.setWidget(0, 0, image);
-		content.setWidget(1, 0, textDiv);
+		content.setWidget(1, 0, infoPanel);
 		
 		//content.getFlexCellFormatter().getElement(1, 0).setAttribute("style", "white-space: nowrap");
 		
 		image.setStyleName("img");
-		//stepperLabel.setStyleName("stepper-label");
+		//imageNumberLabel.setStyleName("stepper-label");
 		captionLabel.setStyleName("caption-label");
-		textDiv.addStyleName("text-div");
+		infoPanel.addStyleName("text-div");
 		content.setStyleName("frame-table");
 	}
 
@@ -59,8 +64,8 @@ public class FrameView extends Composite implements FramePresenter.Display {
 	 * @see hu.qben.balinthirling.client.presenter.FramePresenter.Display#getStepperLabel()
 	 */
 	@Override
-	public HTML getStepperLabel() {
-		return stepperLabel;
+	public HTML getImageNumberLabel() {
+		return imageNumberLabel;
 	}
 
 	/* (non-Javadoc)
@@ -69,5 +74,21 @@ public class FrameView extends Composite implements FramePresenter.Display {
 	@Override
 	public HTML getCaptionLabel() {
 		return captionLabel;
+	}
+
+	/* (non-Javadoc)
+	 * @see hu.qben.balinthirling.client.presenter.FramePresenter.Display#getLeftStepper()
+	 */
+	@Override
+	public Button getLeftStepper() {
+		return leftButton;
+	}
+
+	/* (non-Javadoc)
+	 * @see hu.qben.balinthirling.client.presenter.FramePresenter.Display#getRightStepper()
+	 */
+	@Override
+	public Button getRightStepper() {
+		return rightButton;
 	}
 }

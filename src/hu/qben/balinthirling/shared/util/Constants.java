@@ -8,5 +8,8 @@ package hu.qben.balinthirling.shared.util;
  *
  */
 public interface Constants {
-	public static final String FRAME_HEIGHT_PX = "500px";
+	/**
+	 * The height of the images in the gallery.
+	 */
+	public static final String FRAME_HEIGHT_PX = "580px";
 }

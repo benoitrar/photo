@@ -16,6 +16,7 @@ import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Image;
@@ -29,6 +30,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class FramePresenter implements Presenter {
 	
 	private static final int AUTO_STEP_IN_MILLIS = 3000;
+	private static final Timer autoStepTimer = createAutoStepTimer(AUTO_STEP_IN_MILLIS);
 	
 	/**
 	 * @author Kiss, Benedek
@@ -37,12 +39,13 @@ public class FramePresenter implements Presenter {
 	 */
 	public interface Display {
 		Image getImage();
-		HTML getStepperLabel();
+		Button getLeftStepper();
+		HTML getImageNumberLabel();
+		Button getRightStepper();
 		HTML getCaptionLabel();
 		Widget asWidget();
 	}
 	
-	private static final Timer autoStepTimer = createAutoStepTimer();
 	
 	private static Display display;
 	private HasWidgets container;
@@ -76,7 +79,7 @@ public class FramePresenter implements Presenter {
 
 	private void init() {
 		display.getImage().setUrl(WHITE);
-		display.getStepperLabel().setText("");
+		display.getImageNumberLabel().setText("");
 		display.getCaptionLabel().setText("");
 		RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, JSON_URL + folderName + "/" + themeName);
 		//Window.alert(JSON_URL + folderName + "/" + themeName);
@@ -87,10 +90,11 @@ public class FramePresenter implements Presenter {
 					if(200 == response.getStatusCode()) {
 						images = asArrayOfFileNames(response.getText());
 						if(images.length() == 0) {
-							display.getStepperLabel().setText("There are no images in this category.");
+							display.getImageNumberLabel().setText("There are no images in this category.");
 						} else {
 							counter = 0;
 							display.getImage().setUrl(getUrl());
+							setSteppers();
 							setLabels();
 						}
 						//go(container);
@@ -134,7 +138,6 @@ public class FramePresenter implements Presenter {
 		});
 		
 		display.getImage().addHandler(new KeyDownHandler() {
-			
 			@Override
 			public void onKeyDown(KeyDownEvent event) {
 				if(event.getNativeKeyCode() == KeyCodes.KEY_LEFT) {
@@ -144,6 +147,20 @@ public class FramePresenter implements Presenter {
 				}
 			}
 		}, KeyDownEvent.getType());
+		
+		display.getLeftStepper().addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				FramePresenter.prevImage();
+			}
+		});
+		
+		display.getRightStepper().addClickHandler(new ClickHandler() {
+			@Override
+			public void onClick(ClickEvent event) {
+				FramePresenter.nextImage();
+			}
+		});
 	}
 	
 	/**
@@ -175,15 +192,31 @@ public class FramePresenter implements Presenter {
 	private static void setLabels() {
 		if(!themeName.equals(MenuPresenter.WELCOME)) {
 			if(counter == 0) {
-				display.getStepperLabel().setHTML("You can navigate between photos with your right and left button,<br>or click on photos to go to the next one.");
-				display.getCaptionLabel().setHTML("");
+				display.getImageNumberLabel().setHTML("");
+				display.getCaptionLabel().setHTML("You can navigate between photos with your right and left button,<br>or click on photos to go to the next one.");
 			} else {
-				display.getStepperLabel().setHTML(counter + "/" + (images.length()-1));
+				display.getImageNumberLabel().setHTML(counter + "/" + (images.length()-1));
 				display.getCaptionLabel().setHTML(images.get(counter).getCaption());
 			}
 		}
 	}
 	
+	private void setSteppers() {
+		if(themeName.equals(MenuPresenter.WELCOME)) {
+			setSteppersVisibility(false);
+		} else {
+			setSteppersVisibility(true);
+		}
+	}
+	
+	/**
+	 * @param visibility
+	 */
+	private void setSteppersVisibility(boolean visibility) {
+		display.getLeftStepper().setVisible(visibility);
+		display.getRightStepper().setVisible(visibility);
+	}
+
 	private final native JsArray<JsImage> asArrayOfFileNames(String json) /*-{
 		return eval(json);
 	}-*/;
@@ -194,10 +227,11 @@ public class FramePresenter implements Presenter {
 	}
 
 	/**
+	 * @param autoStepInMillis 
 	 * @return 
 	 * 
 	 */
-	private static Timer createAutoStepTimer() {
+	private static Timer createAutoStepTimer(int autoStepInMillis) {
 		Timer timer = new Timer() {
 			@Override public void run() {
 				if(isAutoSteppingEnabled()) {
@@ -205,7 +239,7 @@ public class FramePresenter implements Presenter {
 				}
 			}
 		};
-		timer.scheduleRepeating(AUTO_STEP_IN_MILLIS);
+		timer.scheduleRepeating(autoStepInMillis);
 		return timer;
 	}
 	
