@@ -15,6 +15,7 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Image;
@@ -27,6 +28,8 @@ import com.google.gwt.user.client.ui.Widget;
 @SuppressWarnings("javadoc")
 public class FramePresenter implements Presenter {
 	
+	private static final int AUTO_STEP_IN_MILLIS = 3000;
+	
 	/**
 	 * @author Kiss, Benedek
 	 * 
@@ -38,6 +41,8 @@ public class FramePresenter implements Presenter {
 		HTML getCaptionLabel();
 		Widget asWidget();
 	}
+	
+	private static final Timer autoStepTimer = createAutoStepTimer();
 	
 	private static Display display;
 	private HasWidgets container;
@@ -187,5 +192,24 @@ public class FramePresenter implements Presenter {
 		FramePresenter.folderName = folderName;
 		FramePresenter.themeName = themeName;
 	}
+
+	/**
+	 * @return 
+	 * 
+	 */
+	private static Timer createAutoStepTimer() {
+		Timer timer = new Timer() {
+			@Override public void run() {
+				if(isAutoSteppingEnabled()) {
+					nextImage();
+				}
+			}
+		};
+		timer.scheduleRepeating(AUTO_STEP_IN_MILLIS);
+		return timer;
+	}
 	
+	private static boolean isAutoSteppingEnabled() {
+		return themeName.equals(MenuPresenter.WELCOME);
+	}
 }
