@@ -21,11 +21,13 @@ public class FrameView extends Composite implements FramePresenter.Display {
 	 * The image. Its <code>source</code> will be set by <code>FramePresenter</code>.
 	 */
 	private final FlexTable content = new FlexTable();
-	private static final HorizontalPanel infoPanel = new HorizontalPanel();//"<div id='text'></div>");
+	private static final HorizontalPanel infoPanel = new HorizontalPanel();
 	private final Image image = new Image();
-	private final Button leftButton = new Button("<");
+	private static final Image leftArrow = createImage("../img/left_arrow.svg", "left-arrow", "<");
+	private static final Image rightArrow = createImage("../img/right_arrow.svg", "right-arrow", ">");
+	private static final Button leftButton = createButton(leftArrow);
+	private static final Button rightButton = createButton(rightArrow);
 	private final HTML imageNumberLabel = new HTML("0/0");
-	private final Button rightButton = new Button(">");
 	private static final HTML separationPanel = new HTML("&nbsp;&nbsp;");
 	private final HTML captionLabel = new HTML(" ");
 	
@@ -50,6 +52,29 @@ public class FrameView extends Composite implements FramePresenter.Display {
 		captionLabel.setStyleName("caption-label");
 		infoPanel.addStyleName("text-div");
 		content.setStyleName("frame-table");
+	}
+
+	/**
+	 * @param icon
+	 * @return
+	 */
+	private static Button createButton(Image icon) {
+		Button button = new Button();
+		button.getElement().appendChild(icon.getElement());
+		return button;
+	}
+
+	/**
+	 * @param path 
+	 * @param styleName
+	 * @param altText
+	 * @return
+	 */
+	private static Image createImage(String path, String styleName, String altText) {
+		Image image = new Image(path);
+		image.addStyleName(styleName);
+		image.setAltText(altText);
+		return image;
 	}
 
 	/* (non-Javadoc)

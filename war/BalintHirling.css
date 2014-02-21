@@ -130,3 +130,8 @@ body {
 .gwt-MenuItemSeparator {
 	display: none;
 }
+
+.left-arrow, .right-arrow {
+	width: 11px;
+	height: 11px;
+}
