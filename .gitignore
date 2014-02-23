@@ -3,4 +3,5 @@
 .project
 .settings/
 gwt-unitCache/
-war/WEB-INF
+war/WEB-INF/classes
+war/balinthirling
