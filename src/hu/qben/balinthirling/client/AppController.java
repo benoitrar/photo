@@ -50,7 +50,7 @@ public class AppController implements ValueChangeHandler<String> {
 	
 	private static final FlexTable skeleton = new FlexTable();
 	private static final HTMLPanel mainDiv = new HTMLPanel("<div id='main'></div>");
-	private static final HTMLPanel titleDiv = new HTMLPanel("<div id='title'><a href='#'><img src='img/hirling_balint_felirat_kicsi.jpg' /></a></div>");	//new HTMLPanel("<div id='title'><a href='#'><b>BALINT HIRLING</b> | PHOTOGRAPHY</a></div>");
+	private static final HTMLPanel titleDiv = new HTMLPanel("<div id='title'><a href='#'><img src='img/hirling_balint_felirat_kicsi.jpg' /></a></div>");
 	private static final FlexTable contentTable = new FlexTable();
 	private static final HTMLPanel menuDiv = new HTMLPanel("<div id='menu'></div>");
 	private static final HTMLPanel frameDiv = new HTMLPanel("<div id='frame'></div>");
