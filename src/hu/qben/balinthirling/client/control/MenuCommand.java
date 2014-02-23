@@ -7,11 +7,11 @@ import com.google.gwt.event.shared.HandlerManager;
 
 /**
  * @author Kiss, Benedek
- *
+ * This class is contains the necessary data for handling a click on a menu item.
  */
-public class MenuCommand implements ScheduledCommand {
+public final class MenuCommand implements ScheduledCommand {
 	
-	private MenuEvent event;
+	private final MenuEvent event;
 	private final HandlerManager eventBus;
 	
 	/**
