@@ -3,5 +3,4 @@
 .project
 .settings/
 gwt-unitCache/
-war/
-war/
+war/WEB-INF
