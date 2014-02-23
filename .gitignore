@@ -4,4 +4,5 @@
 .settings/
 gwt-unitCache/
 war/WEB-INF/classes
+war/WEB-INF/deploy
 war/balinthirling
