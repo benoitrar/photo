@@ -38,9 +38,9 @@ public class FrameView extends Composite implements FramePresenter.Display {
 	 */
 	private final Image image = new Image();
 	private final HorizontalPanel infoPanel = new HorizontalPanel();
-	private final Button leftButton = createButtonWithIcon("../img/left_arrow.svg", LEFT_ARROW_STYLENAME, "<");
+	private final Button leftButton = createButtonWithIcon("../img/left_arrow.jpg", LEFT_ARROW_STYLENAME, "<");
 	private final HTML imageNumberLabel = new HTML("0/0");
-	private final Button rightButton = createButtonWithIcon("../img/right_arrow.svg", RIGHT_ARROW_STYLENAME, ">");
+	private final Button rightButton = createButtonWithIcon("../img/right_arrow.jpg", RIGHT_ARROW_STYLENAME, ">");
 	private final HTML separationPanel = new HTML("&nbsp;&nbsp;");
 	private final HTML captionLabel = new HTML(" ");
 	private final FlexTable content = new FlexTable();
