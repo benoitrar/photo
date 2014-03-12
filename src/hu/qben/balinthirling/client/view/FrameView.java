@@ -8,6 +8,8 @@ import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author Kiss, Benedek
@@ -20,6 +22,13 @@ import com.google.gwt.user.client.ui.Image;
  * |<5/10> caption-------------|
  */
 public class FrameView extends Composite implements FramePresenter.Display {
+	
+	private static class IntroductoryPopup extends PopupPanel {
+		public IntroductoryPopup(Widget contentWidget) {
+			super(true);
+			setWidget(contentWidget);
+		}
+	}
 	
 	/**
 	 * Stylenames of the elements.
@@ -44,6 +53,8 @@ public class FrameView extends Composite implements FramePresenter.Display {
 	private final HTML separationPanel = new HTML("&nbsp;&nbsp;");
 	private final HTML captionLabel = new HTML(" ");
 	private final FlexTable content = new FlexTable();
+	private final HTML introduction = new HTML("Welcome aboard!");
+	private final IntroductoryPopup popupWidget = new IntroductoryPopup(introduction);
 	
 	/**
 	 * Adds an image without functionality.
