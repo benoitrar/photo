@@ -29,6 +29,10 @@ import com.google.gwt.user.client.ui.Widget;
 @SuppressWarnings("javadoc")
 public class FramePresenter implements Presenter {
 	
+	/**
+	 * 
+	 */
+	private static final String NAVIGATION_MESSAGE = "You can navigate between photos with your right and left button,<br>or click on photos to go to the next one.";
 	private static final int AUTO_STEP_IN_MILLIS = 3000;
 	private static final Timer autoStepTimer = createAutoStepTimer(AUTO_STEP_IN_MILLIS);
 	
@@ -193,7 +197,7 @@ public class FramePresenter implements Presenter {
 		if(!themeName.equals(MenuPresenter.WELCOME)) {
 			if(counter == 0) {
 				display.getImageNumberLabel().setHTML("");
-				display.getCaptionLabel().setHTML("You can navigate between photos with your right and left button,<br>or click on photos to go to the next one.");
+				display.getCaptionLabel().setHTML(NAVIGATION_MESSAGE);
 			} else {
 				display.getImageNumberLabel().setHTML(counter + "/" + (images.length()-1));
 				display.getCaptionLabel().setHTML(images.get(counter).getCaption());
