@@ -29,9 +29,6 @@ import com.google.gwt.user.client.ui.Widget;
 @SuppressWarnings("javadoc")
 public class FramePresenter implements Presenter {
 	
-	/**
-	 * 
-	 */
 	private static final String NAVIGATION_MESSAGE = "";
 	private static final int AUTO_STEP_IN_MILLIS = 3000;
 	private static final Timer autoStepTimer = createAutoStepTimer(AUTO_STEP_IN_MILLIS);
