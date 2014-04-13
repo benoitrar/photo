@@ -32,7 +32,7 @@ public class FramePresenter implements Presenter {
 	/**
 	 * 
 	 */
-	private static final String NAVIGATION_MESSAGE = "You can navigate between photos with your right and left button,<br>or click on photos to go to the next one.";
+	private static final String NAVIGATION_MESSAGE = "";
 	private static final int AUTO_STEP_IN_MILLIS = 3000;
 	private static final Timer autoStepTimer = createAutoStepTimer(AUTO_STEP_IN_MILLIS);
 	
