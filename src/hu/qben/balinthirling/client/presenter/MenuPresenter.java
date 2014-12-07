@@ -19,7 +19,9 @@ import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
+import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
@@ -119,6 +121,14 @@ public class MenuPresenter implements Presenter {
 	private void listMenuItems(JsArray<JsFile> arr) {
 		addImageMenuItems(arr);
 		
+		addMenuSeparator();
+		
+		String linkToExternalWeddingGallery = "<a href='https://eskuvo.exposure.co/' target='_blank'>WEDDING</a>";
+		display.getMenu().addItem(new MenuItem(new SafeHtmlBuilder().appendHtmlConstant(linkToExternalWeddingGallery).toSafeHtml()));
+		addMenuSeparator();
+
+		String linkToExternalEditorialGallery = "<a href='https://balinthirling.exposure.co/' target='_blank'>EDITORIAL</a>";
+		display.getMenu().addItem(new MenuItem(new SafeHtmlBuilder().appendHtmlConstant(linkToExternalEditorialGallery).toSafeHtml()));
 		addMenuSeparator();
 		
 		addVideoMenuItems(arr);
