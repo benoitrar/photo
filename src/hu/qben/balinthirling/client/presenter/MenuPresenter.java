@@ -122,12 +122,10 @@ public class MenuPresenter implements Presenter {
 		
 		addMenuSeparator();
 		
-		String linkToExternalWeddingGallery = "<a href='https://eskuvo.exposure.co/' target='_blank'>WEDDING</a>";
-		display.getMenu().addItem(new MenuItem(new SafeHtmlBuilder().appendHtmlConstant(linkToExternalWeddingGallery).toSafeHtml()));
+		createExternalLink("https://eskuvo.exposure.co/", "WEDDING");
 		addMenuSeparator();
 
-		String linkToExternalEditorialGallery = "<a href='https://balinthirling.exposure.co/' target='_blank'>EDITORIAL</a>";
-		display.getMenu().addItem(new MenuItem(new SafeHtmlBuilder().appendHtmlConstant(linkToExternalEditorialGallery).toSafeHtml()));
+		createExternalLink("https://balinthirling.exposure.co/", "EDITORIAL");
 		addMenuSeparator();
 		
 		addVideoMenuItems(arr);
@@ -190,6 +188,11 @@ public class MenuPresenter implements Presenter {
 	private void addMenuItem(String name, String type) {
 		menuItems.add(name);
 		display.getMenu().addItem(new MenuItem(name.toUpperCase().replace('_', ' '), new MenuCommand(new MenuEvent(name.replace(' ', '_'), type), eventBus)));
+	}
+
+	private void createExternalLink(String link, String text) {
+		String linkToExternalEditorialGallery = "<a href=" + link + "target='_blank'>" + text + "</a>";
+		display.getMenu().addItem(new MenuItem(new SafeHtmlBuilder().appendHtmlConstant(linkToExternalEditorialGallery).toSafeHtml()));
 	}
 	
 	private void addMenuSeparator() {
