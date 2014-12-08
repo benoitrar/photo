@@ -189,7 +189,7 @@ public class MenuPresenter implements Presenter {
 	}
 
 	private void createExternalLink(String link, String text) {
-		String linkToExternalEditorialGallery = "<a href=" + link + "target='_blank'>" + text + "</a>";
+		String linkToExternalEditorialGallery = "<a href=" + link + " target='_blank'>" + text + "</a>";
 		display.getMenu().addItem(new MenuItem(new SafeHtmlBuilder().appendHtmlConstant(linkToExternalEditorialGallery).toSafeHtml()));
 	}
 	
