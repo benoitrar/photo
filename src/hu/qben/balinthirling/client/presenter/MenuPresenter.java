@@ -21,7 +21,6 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.MenuBar;
 import com.google.gwt.user.client.ui.MenuItem;
@@ -189,7 +188,6 @@ public class MenuPresenter implements Presenter {
 	}
 
 	private void addMenuItem(String name, String type) {
-		//String programmingName = name.replace(' ', '_');
 		menuItems.add(name);
 		display.getMenu().addItem(new MenuItem(name.toUpperCase().replace('_', ' '), new MenuCommand(new MenuEvent(name.replace(' ', '_'), type), eventBus)));
 	}
