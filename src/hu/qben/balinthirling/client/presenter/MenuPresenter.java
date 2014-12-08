@@ -119,17 +119,15 @@ public class MenuPresenter implements Presenter {
 	 */
 	private void listMenuItems(JsArray<JsFile> arr) {
 		addImageMenuItems(arr);
-		
-		addMenuSeparator();
-		
-		createExternalLink("https://eskuvo.exposure.co/", "WEDDING");
 		addMenuSeparator();
 
 		createExternalLink("https://balinthirling.exposure.co/", "EDITORIAL");
 		addMenuSeparator();
 		
 		addVideoMenuItems(arr);
+		addMenuSeparator();
 		
+		createExternalLink("https://eskuvo.exposure.co/", "WEDDING");
 		addMenuSeparator();
 		
 		addMenuItem(BIO, AppController.STATE_TEXT);
