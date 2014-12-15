@@ -185,7 +185,7 @@ public class MenuPresenter implements Presenter {
 
 	private void addMenuItem(String name, String type) {
 		menuItems.add(name);
-		display.getMenu().addItem(new MenuItem(name.toUpperCase().replace('_', ' '), new MenuCommand(new MenuEvent(name.replace(' ', '_'), type), eventBus)));
+		display.getMenu().addItem(new MenuItem(name.toUpperCase().replace('_', ' ').replace("^\\d+", ""), new MenuCommand(new MenuEvent(name, type), eventBus)));
 	}
 
 	private void createExternalLink(String link, String text) {
