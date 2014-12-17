@@ -1,8 +1,9 @@
-package hu.qben.balinthirling.presenter;
+package hu.qben.balinthirling.client.presenter;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+@SuppressWarnings("javadoc")
 public class MenuPresenterTest {
 
 	@Test

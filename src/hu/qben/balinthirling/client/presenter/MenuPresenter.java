@@ -3,12 +3,13 @@ package hu.qben.balinthirling.client.presenter;
 import hu.qben.balinthirling.client.AppController;
 import hu.qben.balinthirling.client.control.MenuCommand;
 import hu.qben.balinthirling.client.event.MenuEvent;
-import hu.qben.balinthirling.shared.JsFile;
+import hu.qben.balinthirling.shared.JsFolders;
+import hu.qben.balinthirling.shared.JsUtils;
 
 import java.util.LinkedList;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
@@ -85,8 +86,7 @@ public class MenuPresenter implements Presenter {
 				public void onResponseReceived(Request request,
 						Response response) {
 					if (200 == response.getStatusCode()) {
-						//Window.alert(response.getText());
-						listMenuItems(asArrayOfDirectoryNames(response.getText()));
+						listMenuItems(JsUtils.asArrayOfDirectoryNames(response.getText()));
 					} else {
 						Window.alert("Couldn't retrieve JSON (" + response.getStatusText()
 								+ ")");
@@ -114,17 +114,14 @@ public class MenuPresenter implements Presenter {
 
 	}
 
-	/**
-	 * @param arr
-	 */
-	private void listMenuItems(JsArray<JsFile> arr) {
-		addImageMenuItems(arr);
+	private void listMenuItems(JsFolders folders) {
+		addMenuItems(folders.getImageFolders(), AppController.STATE_IMAGE);
 		addMenuSeparator();
 
 		createExternalLink("https://balinthirling.exposure.co/", "EDITORIAL");
 		addMenuSeparator();
 		
-		addVideoMenuItems(arr);
+		addMenuItems(folders.getVideoFolders(), AppController.STATE_VIDEO);
 		addMenuSeparator();
 		
 		createExternalLink("https://eskuvo.exposure.co/", "WEDDING");
@@ -134,55 +131,13 @@ public class MenuPresenter implements Presenter {
 		addMenuItem(CONTACT, AppController.STATE_TEXT);
 	}
 
-	/**
-	 * 
-	 */
-	private void addVideoMenuItems(JsArray<JsFile> arr) {
-		for(int i=0;i<arr.length();i++) {
-			if(isVideoItem(arr.get(i))) {
-				addMenuItem(arr.get(i));
-			}
-		}
-	}
-
-	/**
-	 * @param item
-	 * @return
-	 */
-	private boolean isVideoItem(JsFile item) {
-		if(item.getType() == AppController.STATE_VIDEO) {
-			return true;
-		}
-		return false;
-	}
-
-	/**
-	 * @param arr 
-	 * 
-	 */
-	private void addImageMenuItems(JsArray<JsFile> arr) {
-		for(int i=0;i<arr.length();i++) {
-			if(isImageItem(arr.get(i))) {
-				addMenuItem(arr.get(i));
-			}
+	private void addMenuItems(JsArrayString folderNames, String type) {
+		for(int i=0;i<folderNames.length();i++) {
+			String folderName = folderNames.get(i);
+			addMenuItem(folderName, type);
 		}
 	}
 	
-	/**
-	 * @param item
-	 * @return
-	 */
-	private boolean isImageItem(JsFile item) {
-		if(item.getType() == AppController.STATE_IMAGE) {
-			return true;
-		}
-		return false;
-	}
-
-	private void addMenuItem(JsFile item) {
-		addMenuItem(item.getName(), item.getType());
-	}
-
 	private void addMenuItem(String name, String type) {
 		menuItems.add(name);
 		display.getMenu().addItem(new MenuItem(name.replace('_', ' ').replaceAll("^\\d+", "").toUpperCase(), new MenuCommand(new MenuEvent(name, type), eventBus)));
@@ -197,14 +152,6 @@ public class MenuPresenter implements Presenter {
 		for(int i=0;i<10;i++) {
 			display.getMenu().addSeparator();
 		}
-	}
-	
-	private final native JsArray<JsFile> asArrayOfDirectoryNames(String json) /*-{
-		return eval(json);
-	}-*/;
-
-	public static LinkedList<String> getMenuItems() {
-		return menuItems;
 	}
 	
 }

@@ -5,44 +5,16 @@
 	header('Pragma: no-cache');
 	
 	define("main_dir", "../content/");
-
-	echo "[";
-	//echo "\n";
 	
-	if ($handle = opendir(main_dir . "photos")) {
-		$count = -1;
-		while (false !== ($entry = readdir($handle))) {
-			if ($entry != "." && $entry != ".." && $entry != "welcome") {
-				$count++;
-				$images[] = $entry;
-			}
-		}
-		if ($count >= 0) {
-			echo "{\n\t\"name\":\"$images[$count]\",\n\t\"type\":\"I\"\n}";
-			for ($i=$count-1; $i>=0; $i--) {
-				echo ",\n{\n\t\"name\":\"$images[$i]\",\n\t\"type\":\"I\"\n}";
-			}
-		}
-		
-		closedir($handle);
-	}
-	if ($handle = opendir(main_dir . "slideshows")) {
-		$count = -1;
-		while (false !== ($entry = readdir($handle))) {
-			if ($entry != "." && $entry != "..") {
-				$count++;
-				$slideshows[] = $entry;
-			}
-		}
-		//if ($count >= 0) {
-			//echo "{\n\t\"name\":\"$slideshows[$count]\",\n\t\"type\":\"V\"\n}";
-			for ($i=$count; $i>=0; $i--) {
-				echo ",\n{\n\t\"name\":\"$slideshows[$i]\",\n\t\"type\":\"V\"\n}";
-			}
-		//}
-		
-		closedir($handle);
-	}
-	//echo "\n";
-	echo "]";
+  $images_folders = scandir(main_dir . "photos");
+  $images = array_slice($images_folders, 2, count($images_folders)-3);
+  
+  $slideshows = array_slice(scandir(main_dir . "slideshows"), 2);
+  
+  $folders = array("I" => $images);
+  $folders["V"] = $slideshows;
+  
+  echo '[';
+  echo json_encode($folders);
+  echo ']';
 ?>
