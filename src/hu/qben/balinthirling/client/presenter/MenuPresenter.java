@@ -125,13 +125,16 @@ public class MenuPresenter implements Presenter {
 		createExternalLink("https://balinthirling.exposure.co/", EDITORIAL);
 		addMenuSeparator();
 		
-		addMenuItems(folders.getVideoFolders(), AppController.STATE_VIDEO);
-		addMenuSeparator();
+		JsArrayString videoFolders = folders.getVideoFolders();
+		addMenuItems(videoFolders, AppController.STATE_VIDEO);
+		if(videoFolders.length() > 0) {
+			addMenuSeparator();
+		}
 		
 		createExternalLink("https://eskuvo.exposure.co/", WEDDING);
 		addMenuSeparator();
 
-		createExternalLink("http://instagram.com/bhirling/", INSTAGRAM);
+		createExternalLink("http://instagram.com/balinthirling/", INSTAGRAM);
 		addMenuItem(BIO, AppController.STATE_TEXT);
 		addMenuItem(CONTACT, AppController.STATE_TEXT);
 	}
