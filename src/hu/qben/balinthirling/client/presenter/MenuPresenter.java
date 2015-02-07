@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.Widget;
 @SuppressWarnings("javadoc")
 public class MenuPresenter implements Presenter {
 	
+
 	/**
 	 * @author Kiss, Benedek
 	 * 
@@ -51,11 +52,14 @@ public class MenuPresenter implements Presenter {
 	
 	private static final String JSON_URL = GWT.getHostPageBaseURL() + "php/photos.php";
 	
+	public static final String WELCOME = "welcome";
 	public static final String SLIDESHOWS = "slideshows";
 	public static final String COMMISSIONED_WORK = "commissioned_work";
+	public static final String EDITORIAL = "EDITORIAL";
+	public static final String WEDDING = "WEDDING";
+	public static final String INSTAGRAM = "INSTAGRAM";
 	public static final String BIO = "bio";
 	public static final String CONTACT = "contact";
-	public static final String WELCOME = "welcome";
 	
 	/**
 	 * @param eventBus this will register events
@@ -118,15 +122,16 @@ public class MenuPresenter implements Presenter {
 		addMenuItems(folders.getImageFolders(), AppController.STATE_IMAGE);
 		addMenuSeparator();
 
-		createExternalLink("https://balinthirling.exposure.co/", "EDITORIAL");
+		createExternalLink("https://balinthirling.exposure.co/", EDITORIAL);
 		addMenuSeparator();
 		
 		addMenuItems(folders.getVideoFolders(), AppController.STATE_VIDEO);
 		addMenuSeparator();
 		
-		createExternalLink("https://eskuvo.exposure.co/", "WEDDING");
+		createExternalLink("https://eskuvo.exposure.co/", WEDDING);
 		addMenuSeparator();
-		
+
+		createExternalLink("http://instagram.com/bhirling/", INSTAGRAM);
 		addMenuItem(BIO, AppController.STATE_TEXT);
 		addMenuItem(CONTACT, AppController.STATE_TEXT);
 	}
